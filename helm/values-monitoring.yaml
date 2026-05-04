@@ -1,0 +1,39 @@
+grafana:
+  adminPassword: "prodstack123"
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: web
+    hosts:
+      - ""
+    paths:
+      - /grafana
+
+prometheus:
+  prometheusSpec:
+    retention: 24h
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+      limits:
+        memory: 512Mi
+        cpu: 200m
+
+alertmanager:
+  enabled: false
+
+nodeExporter:
+  enabled: true
+
+# k3s doesn't run these — disable to avoid stuck scrape targets
+kubeEtcd:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
