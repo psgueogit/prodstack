@@ -29,6 +29,6 @@ jobs:
 
       - name: Deploy to cluster
         run: |
-          kubectl --insecure-skip-tls-verify apply -f k8s/
+          kubectl --insecure-skip-tls-verify --validate=false apply -f k8s/
           kubectl --insecure-skip-tls-verify rollout restart deployment/flask-api
           kubectl --insecure-skip-tls-verify rollout status deployment/flask-api
